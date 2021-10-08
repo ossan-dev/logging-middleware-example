@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/logging-middleware-app/.vs/logging-middleware-app/v16
+/logging-middleware-app/logging-middleware/bin/Debug/net5.0
+/logging-middleware-app/logging-middleware/obj
+/logging-middleware-app/logging-middleware/Properties
+/logging-middleware-app/logging-middleware/logging-middleware.csproj.user
