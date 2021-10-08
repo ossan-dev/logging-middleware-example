@@ -69,7 +69,8 @@ namespace logging_middleware.Middlewares
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "An exception occurred while processing the request");
+                LogContext.PushProperty("StackTrace", ex.StackTrace);
+                //Log.Error(ex, "An exception has occurred while processing the request");
                 throw;
             }
             finally
