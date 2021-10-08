@@ -10,11 +10,11 @@ namespace logging_middleware.Helpers
 {
     public static class LogHelper
     {
-        public static async Task EnrichFromRequest(IDiagnosticContext diagnosticContext, HttpContext httpContext)
+        public static void EnrichFromRequest(IDiagnosticContext diagnosticContext, HttpContext httpContext)
         {
             var request = httpContext.Request;
 
-            string responseBodyPayload = await ReadResponseBodyAsync(httpContext.Response);
+            string responseBodyPayload = ReadResponseBodyAsync(httpContext.Response).GetAwaiter().GetResult();
 
             diagnosticContext.Set("Host", request.Host);
             diagnosticContext.Set("RequestQueryString", request.QueryString);

@@ -1,3 +1,5 @@
+using logging_middleware.Helpers;
+using logging_middleware.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +46,9 @@ namespace logging_middleware
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "logging_middleware v1"));
             }
+
+            app.UseMiddleware<RequestResponseLogger>();
+            app.UseSerilogRequestLogging(opt => opt.EnrichDiagnosticContext = LogHelper.EnrichFromRequest);
 
             app.UseHttpsRedirection();
 

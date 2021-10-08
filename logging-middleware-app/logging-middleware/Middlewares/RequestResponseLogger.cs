@@ -1,5 +1,6 @@
 ﻿using logging_middleware.Helpers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.IO;
 using Serilog;
 using Serilog.Context;
