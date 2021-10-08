@@ -27,7 +27,7 @@ namespace logging_middleware.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            _logger.LogInformation("Hi from Get()");
+            //_logger.LogInformation("Hi from Get()");
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -41,7 +41,7 @@ namespace logging_middleware.Controllers
         [HttpPost]
         public IActionResult Post(Input input)
         {
-            _logger.LogInformation("Hi from Post()");
+            //_logger.LogInformation("Hi from Post()");
             return Ok(new Output()
             {
                 Message = $"Hi {input.Name}!",
