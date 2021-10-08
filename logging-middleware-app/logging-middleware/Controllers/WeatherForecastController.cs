@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using logging_middleware.ApiModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace logging_middleware.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            _logger.LogInformation("Hi from Get()");
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -34,6 +36,17 @@ namespace logging_middleware.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpPost]
+        public IActionResult Post(Input input)
+        {
+            _logger.LogInformation("Hi from Post()");
+            return Ok(new Output()
+            {
+                Message = $"Hi {input.Name}!",
+                ProcessedAt = DateTime.Now
+            });
         }
     }
 }
