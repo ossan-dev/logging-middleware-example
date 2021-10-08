@@ -1,9 +1,11 @@
 ﻿using logging_middleware.ApiModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace logging_middleware.Controllers
@@ -17,17 +19,14 @@ namespace logging_middleware.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController()
         {
-            _logger = logger;
+
         }
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            //_logger.LogInformation("Hi from Get()");
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -41,7 +40,19 @@ namespace logging_middleware.Controllers
         [HttpPost]
         public IActionResult Post(Input input)
         {
-            //_logger.LogInformation("Hi from Post()");
+            return Ok(new Output()
+            {
+                Message = $"Hi {input.Name}!",
+                ProcessedAt = DateTime.Now
+            });
+        }
+
+        [HttpPost]
+        [Route("error")]
+        public IActionResult Error(Input input)
+        {
+            var num = 0;
+            int result = 1 / num;
             return Ok(new Output()
             {
                 Message = $"Hi {input.Name}!",
