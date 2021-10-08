@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace logging_middleware.Helpers
@@ -18,6 +19,7 @@ namespace logging_middleware.Helpers
 
             diagnosticContext.Set("Host", request.Host);
             diagnosticContext.Set("RequestQueryString", request.QueryString);
+            diagnosticContext.Set("User", "test@example.com");
 
             diagnosticContext.Set("ResponseBody", responseBodyPayload);
         }
